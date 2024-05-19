@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  lica_api_dev:
+    container_name: lica_api_dev
+    image: lica_api_dev:1.0.0
+    build:
+      context: .
+      target: development
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - lica_mongodb # Đảm bảo mongoDB đã start thành công mới chạy container api
+    volumes:
+      - ./:/usr/src/app
+    command: npm run start:dev
+    restart: unless-stopped
+
+  lica_mongodb:
+    container_name: ${DATABASE_HOST}
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME} # Lưu ý 2 biến này từ file env
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD} # và dùng --env-file để đọc từ .env.dev
+    expose:
+      - ${DATABASE_PORT}
+    volumes:
+      - ./mongo-data:/data/db
+    restart: unless-stopped
+
+
+ 
+networks:
+  default:
+    driver: bridge
+
+
+    
