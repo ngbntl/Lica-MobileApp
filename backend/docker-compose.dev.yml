@@ -7,11 +7,25 @@ services:
     build:
       context: .
       target: development
-    command: npm run start:dev
     ports:
       - ${PORT}:${PORT}
+    depends_on: 
+      - lica_mongodb 
     volumes:
       - ./:/usr/src/app
+    command: npm run start:dev
+    restart: unless-stopped
+
+  lica_mongodb:
+    container_name: ${DATABASE_HOST}
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME} 
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD} 
+    expose:
+      - ${DATABASE_PORT}
+    volumes:
+      - ./mongo-data:/data/db 
     restart: unless-stopped
 
 networks:
