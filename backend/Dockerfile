@@ -1,11 +1,6 @@
-FROM node:19-alpine as development
+FROM node:20.11.1-alpine as development
 
 WORKDIR /usr/src/app
-
-ENV NODE_ENV=development
-
-# node:19-alpine throw `ps: not found` if using nestjs watch mode, so install this stuff will help us resolve this error 
-# RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
 
@@ -17,9 +12,9 @@ COPY . .
 
 RUN npm run build
 
-CMD [ "npm","run","start:dev" ]
+CMD [ "npm", "run", "start:dev" ]
 
-FROM node:19-alpine as production
+FROM node:20.11.1-alpine as production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
