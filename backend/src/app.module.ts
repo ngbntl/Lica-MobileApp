@@ -4,7 +4,11 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { database_config } from './configs/configuration.config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './modules/users/users.module';
+import { UserRolesModule } from './modules/user-roles/user-roles.module';
+import { TopicsModule } from './modules/topics/topics.module';
+import { CardsModule } from './modules/cards/cards.module';
+import { CollectionModule } from './modules/collection/collection.module';
 import * as Joi from 'joi';
 @Module({
 	imports: [
@@ -35,6 +39,14 @@ import * as Joi from 'joi';
 		}),
 
 		UsersModule,
+
+		UserRolesModule,
+
+		TopicsModule,
+
+		CardsModule,
+
+		CollectionModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
