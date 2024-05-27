@@ -10,6 +10,7 @@ import { TopicsModule } from './modules/topics/topics.module';
 import { CardsModule } from './modules/cards/cards.module';
 import { CollectionModule } from './modules/collection/collection.module';
 import * as Joi from 'joi';
+import { AuthModule } from '@modules/auth/auth.module';
 @Module({
 	imports: [
 		ConfigModule.forRoot({
@@ -47,6 +48,7 @@ import * as Joi from 'joi';
 		CardsModule,
 
 		CollectionModule,
+		AuthModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

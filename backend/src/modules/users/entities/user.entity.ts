@@ -72,7 +72,7 @@ export class User extends BaseEntity {
 
 	@Prop({
 		required: true,
-		select: false,
+		//select: false,
 	})
 	password: string;
 
@@ -97,13 +97,15 @@ export class User extends BaseEntity {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: UserRole.name,
 	})
+	@Type(() => UserRole)
+	@Transform((value) => value.obj.role?.name, { toClassOnly: true })
 	role: UserRole;
 
 	@Prop()
 	headline: string;
 
-	@Prop()
-	friendly_id: number;
+	// @Prop()
+	// friendly_id: number;
 
 	@Prop({
 		default: 'cus_mock_id',
@@ -111,13 +113,9 @@ export class User extends BaseEntity {
 	@Exclude()
 	stripe_customer_id: string;
 
-	// @Prop({
-	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: UserRole.name,
-	// })
-	// @Type(() => UserRole)
-	// @Transform((value) => value.obj.role?.name, { toClassOnly: true })
-	// role: UserRole;
+	@Prop()
+	@Exclude()
+	current_refresh_token: string;
 
 	@Expose({ name: 'full_name' })
 	get fullName(): string {
