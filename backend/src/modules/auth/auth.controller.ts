@@ -4,6 +4,7 @@ import { LocalAuthGuard } from './guards/local.guard';
 
 import { SignUpDto } from './dto/sign-up.dto';
 import { RequestWithUser } from 'src/types/requests.type';
+import { JwtRefreshTokenGuard } from './guards/jwt-refresh-token-guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,5 +20,16 @@ export class AuthController {
 	async signIn(@Req() request: RequestWithUser) {
 		const { user } = request;
 		return await this.auth_service.signIn(user.id.toString());
+	}
+	@UseGuards(JwtRefreshTokenGuard)
+	@Post('refresh')
+	async refreshAccessToken(@Req() request: RequestWithUser) {
+		const { user } = request;
+		const access_token = this.auth_service.generateAccessToken({
+			user_id: user.id.toString(),
+		});
+		return {
+			access_token,
+		};
 	}
 }

@@ -5,6 +5,7 @@ import {
 	BadRequestException,
 	ConflictException,
 	Injectable,
+	UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -25,6 +26,7 @@ export class AuthService {
 			const existed_user = await this.users_service.findOneByCondition({
 				email: sign_up_dto.email,
 			});
+
 			if (existed_user) {
 				throw new ConflictException('Email already existed!!');
 			}
@@ -39,7 +41,18 @@ export class AuthService {
 				)}`,
 				password: hashed_password,
 			});
-			return user;
+
+			const refresh_token = this.generateRefreshToken({
+				user_id: user.id.toString(),
+			});
+			await this.storeRefreshToken(user.id.toString(), refresh_token);
+			return {
+				user,
+				access_token: this.generateAccessToken({
+					user_id: user.id.toString(),
+				}),
+				refresh_token,
+			};
 		} catch (error) {
 			throw error;
 		}
@@ -102,6 +115,26 @@ export class AuthService {
 		try {
 			const hashed_token = await bcrypt.hash(token, this.SALT_ROUND);
 			await this.users_service.setCurrentRefreshToken(user_id, hashed_token);
+		} catch (error) {
+			throw error;
+		}
+	}
+	async getUserIfRefreshTokenMatched(
+		user_id: string,
+		refresh_token: string,
+	): Promise<User> {
+		try {
+			const user = await this.users_service.findOneByCondition({
+				id: user_id,
+			});
+			if (!user) {
+				throw new UnauthorizedException();
+			}
+			await this.verifyPlainContentWithHashedContent(
+				refresh_token,
+				user.current_refresh_token,
+			);
+			return user;
 		} catch (error) {
 			throw error;
 		}
