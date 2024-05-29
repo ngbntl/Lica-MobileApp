@@ -1,8 +1,8 @@
 import {
 	Collection,
 	CollectionDocument,
-} from '@modules/collection/entities/collection.entity';
-import { CollectionRepositoryInterface } from '@modules/collection/interfaces/collection.interface';
+} from '@modules/collections/entities/collection.entity';
+import { CollectionRepositoryInterface } from '@modules/collections/interfaces/collection.interface';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';

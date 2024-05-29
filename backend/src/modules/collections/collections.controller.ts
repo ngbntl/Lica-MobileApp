@@ -7,7 +7,7 @@ import {
 	Param,
 	Delete,
 } from '@nestjs/common';
-import { CollectionsService } from './collection.service';
+import { CollectionsService } from './collections.service';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 

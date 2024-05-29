@@ -5,7 +5,7 @@ import { UserRole } from '@modules/user-roles/entities/user-role.entity';
 import { CardDocument } from '@modules/cards/entities/card.entity';
 import { NextFunction } from 'express';
 import { Mode } from 'fs';
-import { CollectionDocument } from '@modules/collection/entities/collection.entity';
+import { CollectionDocument } from '@modules/collections/entities/collection.entity';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 export type UserDocument = HydratedDocument<User>;
 

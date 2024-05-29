@@ -1,26 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { BaseServiceAbstract } from 'src/services/base/base.abstract.service';
+import { Card } from './entities/card.entity';
+import { CardsRepositoryInterface } from './interfaces/cards.interface';
 
 @Injectable()
-export class CardsService {
-  create(createCardDto: CreateCardDto) {
-    return 'This action adds a new card';
-  }
-
-  findAll() {
-    return `This action returns all cards`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} card`;
-  }
-
-  update(id: number, updateCardDto: UpdateCardDto) {
-    return `This action updates a #${id} card`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} card`;
-  }
+export class CardsService extends BaseServiceAbstract<Card> {
+	constructor(
+		@Inject('FlashCardsRepositoryInterface')
+		private readonly cards_repository: CardsRepositoryInterface,
+	) {
+		super(cards_repository);
+	}
 }

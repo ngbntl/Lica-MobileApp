@@ -12,13 +12,13 @@ export class Card extends BaseEntity {
 	@Prop({ required: true })
 	vocabulary: string;
 
-	@Prop({ required: true })
+	@Prop({})
 	image: string;
 
 	@Prop({ required: true })
 	definition: string;
 
-	@Prop({ required: true })
+	@Prop({})
 	meaning: string;
 
 	@Prop()
