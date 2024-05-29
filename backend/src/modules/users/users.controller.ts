@@ -34,8 +34,8 @@ export class UsersController {
 		excludePrefixes: ['first', 'last'],
 	})
 	@Get()
-	// @Roles(USER_ROLE.USER)
-	// @UseGuards(RolesGuard)
+	@Roles(USER_ROLE.USER)
+	@UseGuards(RolesGuard)
 	@UseGuards(JwtAccessTokenGuard)
 	findAll() {
 		return this.users_service.findAll();

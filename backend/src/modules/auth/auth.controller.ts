@@ -4,7 +4,7 @@ import { LocalAuthGuard } from './guards/local.guard';
 
 import { SignUpDto } from './dto/sign-up.dto';
 import { RequestWithUser } from 'src/types/requests.type';
-import { JwtRefreshTokenGuard } from './guards/jwt-refresh-token-guard';
+import { JwtRefreshTokenGuard } from './guards/jwt-refresh-token.guard';
 
 @Controller('auth')
 export class AuthController {

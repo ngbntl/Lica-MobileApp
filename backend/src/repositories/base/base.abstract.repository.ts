@@ -3,6 +3,7 @@ import { FilterQuery, Model, QueryOptions } from 'mongoose';
 import { FindAllResponse } from 'src/types/common.type';
 import { BaseRepositoryInterface } from './base.interface.repository';
 import { Document } from 'mongoose';
+import { NotFoundException } from '@nestjs/common';
 export abstract class BaseRepositoryAbstract<T extends BaseEntity>
 	implements BaseRepositoryInterface<T>
 {
@@ -17,6 +18,9 @@ export abstract class BaseRepositoryAbstract<T extends BaseEntity>
 
 	async findOneById(id: string): Promise<T> {
 		const item = await this.model.findById(id);
+		if (!item) {
+			throw new NotFoundException(`Item with ID ${id} not found`);
+		}
 		return item.deleted_at ? null : item;
 	}
 

@@ -7,8 +7,8 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-	@IsNotEmpty() // Bắt buộc phải gửi lên
-	@MaxLength(50) // Tối đa 50 ký tự
+	@IsNotEmpty()
+	@MaxLength(50)
 	first_name: string;
 
 	@IsNotEmpty()
@@ -17,7 +17,7 @@ export class CreateUserDto {
 
 	@IsNotEmpty()
 	@MaxLength(50)
-	@IsEmail() // Phải là định dạng email
+	@IsEmail()
 	email: string;
 
 	@IsNotEmpty()
@@ -25,6 +25,6 @@ export class CreateUserDto {
 	username: string;
 
 	@IsNotEmpty()
-	@IsStrongPassword() // Password phải đủ độ mạnh
+	@IsStrongPassword()
 	password: string;
 }
