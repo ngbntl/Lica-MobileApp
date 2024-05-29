@@ -1,26 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCollectionDto } from './dto/create-collection.dto';
-import { UpdateCollectionDto } from './dto/update-collection.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { BaseServiceAbstract } from 'src/services/base/base.abstract.service';
+import { Collection } from './entities/collection.entity';
+import { CollectionRepositoryInterface } from './interfaces/collection.interface';
 
 @Injectable()
-export class CollectionService {
-	create(createCollectionDto: CreateCollectionDto) {
-		return 'This action adds a new collection';
-	}
-
-	findAll() {
-		return `This action returns all collection`;
-	}
-
-	findOne(id: number) {
-		return `This action returns a #${id} collection`;
-	}
-
-	update(id: number, updateCollectionDto: UpdateCollectionDto) {
-		return `This action updates a #${id} collection`;
-	}
-
-	remove(id: number) {
-		return `This action removes a #${id} collection`;
+export class CollectionsService extends BaseServiceAbstract<Collection> {
+	constructor(
+		@Inject('CollectionRepositoryInterface')
+		private readonly collection_repository: CollectionRepositoryInterface,
+	) {
+		super(collection_repository);
 	}
 }

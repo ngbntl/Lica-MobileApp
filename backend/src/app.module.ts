@@ -8,7 +8,7 @@ import { UsersModule } from './modules/users/users.module';
 import { UserRolesModule } from './modules/user-roles/user-roles.module';
 import { TopicsModule } from './modules/topics/topics.module';
 import { CardsModule } from './modules/cards/cards.module';
-import { CollectionModule } from './modules/collection/collection.module';
+import { CollectionsModule } from './modules/collection/collection.module';
 import * as Joi from 'joi';
 import { AuthModule } from '@modules/auth/auth.module';
 @Module({
@@ -47,7 +47,7 @@ import { AuthModule } from '@modules/auth/auth.module';
 
 		CardsModule,
 
-		CollectionModule,
+		CollectionsModule,
 		AuthModule,
 	],
 	controllers: [AppController],
