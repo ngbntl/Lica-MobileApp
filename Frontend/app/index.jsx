@@ -2,7 +2,7 @@ import { ScrollView, Text, View, Animated } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import LottieView from 'lottie-react-native';
 const RootLayout = () => {
   const navigation = useNavigation();
   const [fadeAnim] = useState(new Animated.Value(0))  // Initial value for opacity: 0
@@ -29,6 +29,7 @@ const RootLayout = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Animated.View style={{opacity: fadeAnim}}>
           <Text style={{fontSize: 40, fontWeight: 'bold', color: 'green'}}>Lica</Text>
+         
         </Animated.View>
       </ScrollView>
     </SafeAreaView>
