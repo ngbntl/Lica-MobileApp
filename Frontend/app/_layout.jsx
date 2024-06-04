@@ -29,7 +29,11 @@ const RootLayout = () => {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="start" options={{headerShown:false}}/>
-      
+      <Stack.Screen 
+        name="ls" 
+       
+        options={{ headerShown: false }}
+      />
     </Stack>
   );
 };
