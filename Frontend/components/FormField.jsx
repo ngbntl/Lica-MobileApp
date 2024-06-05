@@ -1,18 +1,27 @@
-import { View, Text, TextInput } from 'react-native'
-import React from 'react'
-
-const FormField = (title, value, placeholder, handleChangeText, ortherStyles, ...props) => {
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
+import React, { useState } from 'react'
+import {icons, images} from '../constants'
+const FormField = ({title, value, placeholder, handleChangeText, ortherStyles, ...props}) => {
+  const [showPassword, setshowPassword] = useState(false)
   return (
     <View className={`space-y-2 ${ortherStyles}`} >
       <Text className='text-base text-gray-400'>{title}</Text>
-      <View className='border-2 border-green-300 w-full h-16 px-4 bg-green-50 rounded-2xl focus:border-green-500 items-center'>
+      <View className='border-2 border-gray-300 w-full h-16 px-4  rounded-lg focus:border-green-500 flex-row '>
         <TextInput 
-        className='flex-1 text-black  font-psemibold text-base'
+        className='flex-1 font-pmedium text-base'
         value={value}
         placeholder={placeholder}
-        placeholderTextColor="gray-500"
+        placeholderTextColor=""
         onChangeText={handleChangeText}
-        secureTextEntry></TextInput>
+        secureTextEntry={title === 'Password' && !showPassword}
+        />
+        {title === 'Password' && (
+          <TouchableOpacity onPress={()=>{
+            setshowPassword(!showPassword)
+          }}>
+            <Image source={!showPassword ? icons.eye : icons.eyeHide} className='w-8 h-8 top-3' resizeMode='contain' />
+          </TouchableOpacity>
+        )}
         </View>
       </View>
   )
