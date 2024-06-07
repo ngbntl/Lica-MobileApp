@@ -88,8 +88,8 @@ function start() {
   return (
     <SafeAreaView className="bg-white h-full">
     <ScrollView contentContainerStyle={{height:'100%'}}>
-      <View className="relative items-center justify-center w-full h-full  ">
-        <Onboarding  className='absolute'
+      <View className=" w-full h-full  ">
+        <Onboarding  className='absolute -top-8'
         bottomBarColor="#fff"
         NextButtonComponent={CustomNextButton}
         SkipButtonComponent={CustomSkipButton}
@@ -132,7 +132,6 @@ function start() {
                 subtitle: <CustomSubtitle subtitle='Learn together, progress together - Aplace for knowledge exchange'/>,
               },
          
-             
             ]}
           />
         </View>

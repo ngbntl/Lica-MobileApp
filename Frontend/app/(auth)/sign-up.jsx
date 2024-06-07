@@ -15,18 +15,8 @@ const signUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = ()=>{
-    if( !form.username || !form.email || !form.password){
-      Alert.alert('Error','Please fill in all the fields')
-    }
-    setIsSubmitting(true);
-    try{
-      const result = await createUser()
-    }catch(error){
-      Alert.alert('Error', error.message)
-    }finally{
-      setIsSubmitting(false);
-    }
-
+    
+   
   }
   return (
   <SafeAreaView className="bg-white h-full">
