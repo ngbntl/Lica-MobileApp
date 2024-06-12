@@ -7,15 +7,30 @@ import { Link } from 'expo-router'
 
 const signUp = () => {
   const [form, setForm] = useState({
-    username:'',
+    first_name:'',
+    last_name:'',
     email:'',
     password:''
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const submit = ()=>{
-    
+  const submit = async ()=>{
+    if(!form.username || form.email || form.password){
+      Alert.alert('Error','Please fill in all the fields')
+    }
+    setIsSubmitting(true)
+    try{
+      const res = await user.signUp(form);
+      console.log(res)
+      router.push('/sign-in')
+    }catch(error){
+      console.log(error)
+      if(error.message == "Request failed with status code 400"){
+        Alert.alert('Error','Invalid email or password');
+      }
+
+    }
    
   }
   return (
@@ -26,10 +41,18 @@ const signUp = () => {
        
         <FormField
        title="Username"
-       value={form.email}
-       handleChangeText={(e)=> setForm({...form, email:e})}
+       value={form.username}
+       handleChangeText={(e)=> setForm({...form, username:e})}
        ortherStyles="mt-7"
-       keyBoardType="email-address"
+       keyBoardType="default"
+       placeholder=''
+       />
+         <FormField
+       title="Username"
+       value={form.username}
+       handleChangeText={(e)=> setForm({...form, username:e})}
+       ortherStyles="mt-7"
+       keyBoardType="default"
        placeholder=''
        />
        <FormField

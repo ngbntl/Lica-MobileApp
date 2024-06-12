@@ -100,7 +100,7 @@ function start() {
             pages={[
               {
                 backgroundColor: '#fff',
-                image: (<LottieView source={require('../assets/animations/start.json')} autoPlay
+                image: (<LottieView source={require('../assets/animations/Start.json')} autoPlay
                 loop
                 style={
                  { height:300, width:300}
@@ -111,7 +111,7 @@ function start() {
               },
               {
                 backgroundColor: '#fff',
-                image: (<LottieView source={require('../assets/animations/start.json')} autoPlay
+                image: (<LottieView source={require('../assets/animations/Slide2.json')} autoPlay
                 loop
                 style={
                  { height:300, width:300}
@@ -122,7 +122,7 @@ function start() {
               },
               {
                 backgroundColor: '#fff',
-                image: (<LottieView source={require('../assets/animations/start.json')} autoPlay
+                image: (<LottieView source={require('../assets/animations/End.json')} autoPlay
                 loop
                 style={
                  { height:300, width:300}

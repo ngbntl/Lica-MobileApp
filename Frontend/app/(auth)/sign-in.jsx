@@ -3,11 +3,10 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link } from 'expo-router'
-import { user } from '../../repositories/user';
+import { Link, router } from 'expo-router'
+import user  from '../../repositories/user';
 const signIn = () => {
 
-  // const {setUser, setIsLogged} = useGloc
   const [form, setForm] = useState({
     email:'',
     password:''
@@ -25,8 +24,12 @@ const signIn = () => {
     try{
       const res = await user.signin(form);
       console.log(res)
+      router.push('/home')
     }catch(error){
-      Alert.alert('Error', error.message)
+      
+      if(error.message == "Request failed with status code 400"){
+        Alert.alert('Error','Invalid email or password');
+      }
     }finally{
       setIsSubmitting(false);
     }
