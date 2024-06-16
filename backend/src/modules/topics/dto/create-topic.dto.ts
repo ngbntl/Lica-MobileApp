@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
+import { Collection } from 'mongoose';
 
 export class CreateTopicDto {
 	@IsNotEmpty()
@@ -6,4 +7,7 @@ export class CreateTopicDto {
 
 	@IsOptional()
 	description: string;
+
+	@IsOptional()
+	collection?: any[];
 }

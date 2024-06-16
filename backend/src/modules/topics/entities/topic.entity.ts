@@ -1,9 +1,10 @@
 import { BaseEntity } from '@modules/shared/base/base.entity';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Exclude, Transform } from 'class-transformer';
-import { HydratedDocument, Types } from 'mongoose';
 
-export type TopicDocument = HydratedDocument<Topic>;
+import * as mongoose from 'mongoose';
+import { Collection } from '@modules/collections/entities/collection.entity';
+
+export type TopicDocument = mongoose.HydratedDocument<Topic>;
 
 @Schema({
 	timestamps: {
@@ -24,6 +25,9 @@ export class Topic extends BaseEntity {
 
 	@Prop()
 	description: string;
+
+	@Prop({ type: [{ type: mongoose.Schema.Types.String, ref: 'Collection' }] })
+	collections: Collection[];
 }
 
 export const TopicSchema = SchemaFactory.createForClass(Topic);

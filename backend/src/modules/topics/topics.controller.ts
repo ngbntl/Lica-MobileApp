@@ -8,6 +8,7 @@ import {
 	Delete,
 	UseGuards,
 	UseInterceptors,
+	Query,
 } from '@nestjs/common';
 import { TopicsService } from './topics.service';
 import { CreateTopicDto } from './dto/create-topic.dto';
@@ -16,6 +17,7 @@ import { JwtAccessTokenGuard } from '@modules/auth/guards/jwt-access-token.guard
 import { Public } from 'src/decorators/auth.decorator';
 import MongooseClassSerializerInterceptor from 'src/interceptors/mongoose-class-serializer.interceptor';
 import { Topic } from './entities/topic.entity';
+import { Collection } from 'mongoose';
 
 @Controller('topics')
 @UseGuards(JwtAccessTokenGuard)
@@ -32,6 +34,11 @@ export class TopicsController {
 	@Public()
 	findAll() {
 		return this.topicsService.findAll();
+	}
+
+	@Get()
+	findByCollection(@Query('collection') collection: string) {
+		return this.topicsService.findAll({ collections: { $in: [collection] } });
 	}
 
 	@Get(':id')

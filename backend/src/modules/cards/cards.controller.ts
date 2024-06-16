@@ -6,6 +6,7 @@ import {
 	Patch,
 	Param,
 	Delete,
+	Query,
 } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { CreateCardDto } from './dto/create-card.dto';

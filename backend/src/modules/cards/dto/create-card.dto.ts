@@ -15,6 +15,6 @@ export class CreateCardDto {
 	@IsNotEmpty()
 	user?: User;
 
-	@IsNotEmpty()
-	topic?: Topic;
+	@IsOptional()
+	topics?: any[];
 }
