@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
+import authenticationAPI from '../../apis/auth'
 
 const signUp = () => {
   const [form, setForm] = useState({
@@ -16,23 +17,18 @@ const signUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = async ()=>{
-    if(!form.username || form.email || form.password){
-      Alert.alert('Error','Please fill in all the fields')
-    }
-    setIsSubmitting(true)
-    try{
-      const res = await user.signUp(form);
-      console.log(res)
-      router.push('/sign-in')
-    }catch(error){
-      console.log(error)
-      if(error.message == "Request failed with status code 400"){
-        Alert.alert('Error','Invalid email or password');
-      }
+    setIsSubmitting(true);
 
+    try{
+    const res = await authenticationAPI.HandleAuthentication('/sign-up',form,'post');
+    console.log(res);
+    }catch(error){
+      console.log(error);
+      setIsSubmitting(false);
     }
-   
-  }
+    }
+  
+  
   return (
   <SafeAreaView className="bg-white h-full">
     <ScrollView >
@@ -40,17 +36,17 @@ const signUp = () => {
         <Text className='text-3xl font-pbold text-center'>Sign Up</Text>
        
         <FormField
-       title="Username"
-       value={form.username}
-       handleChangeText={(e)=> setForm({...form, username:e})}
+       title="First name "
+       value={form.first_name}
+       handleChangeText={(e)=> setForm({...form, first_name:e})}
        ortherStyles="mt-7"
        keyBoardType="default"
        placeholder=''
        />
          <FormField
-       title="Username"
-       value={form.username}
-       handleChangeText={(e)=> setForm({...form, username:e})}
+       title="Last name"
+       value={form.last_name}
+       handleChangeText={(e)=> setForm({...form, last_name:e})}
        ortherStyles="mt-7"
        keyBoardType="default"
        placeholder=''
@@ -71,8 +67,6 @@ const signUp = () => {
         keyBoardType="default"
         placeholder=''
         secureTextEntry
-        
-       
        />
 
        <CustomButton

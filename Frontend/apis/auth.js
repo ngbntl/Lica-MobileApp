@@ -1,14 +1,13 @@
 import axios from "axios";
-const baseUrl = "http://192.168.1.3:3000";
+const baseUrl = "http://192.168.1.9:3000";
 
-const signin = async ({ email, password }) => {
+const signin = async (data) => {
   try {
     const url = `${baseUrl}/auth/sign-in`;
-    const response = await axios.post(
-      url,
-      { email, password },
-      { headers: { "Content-Type": "application/json" } }
-    );
+
+    const response = await axios.post(url, data, {
+      headers: { "Content-Type": "application/json" },
+    });
     return response.data;
   } catch (error) {
     throw error;

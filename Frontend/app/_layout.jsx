@@ -1,10 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
+import { Text } from 'react-native';
 import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import store from "../stores/store";
+import { Provider, useSelector } from 'react-redux';
 
 SplashScreen.preventAutoHideAsync();
 
+
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <RootLayout />
+    </Provider>
+  );
+};
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -16,28 +27,27 @@ const RootLayout = () => {
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
   });
-
+  const accessToken = useSelector(state => state.auth.authData.accesstoken);
   useEffect(() => {
     if (error) throw error;
-
     if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error]);
+    console.log(accessToken)
 
+  }, [fontsLoaded, error]);
   if (!fontsLoaded && !error) return null;
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="start" options={{headerShown:false}}/>
-      <Stack.Screen 
-        name="ls" 
-        options={{ headerShown: false }}
-      />
+    <Stack screenOptions={{headerShown:false}}>
+      {accessToken ? (
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      ) : (
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      )}
+      <Stack.Screen name="start" options={{ headerShown: false }} />
+      <Stack.Screen name="ls" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
     </Stack>
   );
 };
 
-export default RootLayout;
+export default App;

@@ -4,7 +4,7 @@ import React from 'react'
 const Collection = () => {
   return (
     <View>
-      <Text>Collection</Text>
+      <Text className = 'font-psemibold text-2xl mt-12 text-center'>Collection</Text>
     </View>
   )
 }
