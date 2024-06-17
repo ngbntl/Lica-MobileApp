@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../../components/SearchBar';
 import Collection_card from '../../components/collection/Collection_card';
 import collections from '../../apis/collections';
+import { Link } from 'expo-router';
 
 
 
@@ -26,10 +27,21 @@ const Home =  () => {
 
       <SearchBar/>
       <Text className='text-black font-psemibold text-lg mt-10 ml-5'>Collections</Text>
-   
       <ScrollView horizontal={true}>
+
+        
         {collection.map((item, index) => (
-          <Collection_card key={index} title={item.name} image={item.image} className='h-20 'style={{flexDirection:'row'}}/>
+            <Link
+            key={index}
+            href={{
+              pathname: '/(modals)/collection_detail',
+              params: { id: item._id }
+            }}
+            className='m-2'
+          >
+          <Collection_card key={index} title={item.name} image={item.image} className='h-20 'style={{flexDirection:'row'}} />
+        </Link>
+
         ))}
       </ScrollView>
    
