@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 import topic from '../../apis/topics';
+import Collection_list from '../../components/collection/Colletion_list';
 
 const CollectionDetail = () => {
 
@@ -15,6 +16,7 @@ const CollectionDetail = () => {
       try {
         const response = await topic.getTopicsByColletionId(id);
         setTopics(response);
+        console.log(response)
       } catch (error) {
         console.log(error);
       }
@@ -26,10 +28,20 @@ const CollectionDetail = () => {
   return (
   
      <View className='mt-10 h-full w-full'>
-      <Text className='text-center font-psemibold text-xl'>Topics</Text>
-      {topics.map((item,index)=>{
+      <Text className='text-center font-psemibold text-2xl mt-2 text-green-500'>Topics</Text>
+      {topics.map((item,index)=>(
         
-      })}
+<Link key={index}
+href={
+  {
+    pathname: '/(modals)/card',
+    params: { id: item._id }
+  }
+} className='m-2 w-full'>
+  
+         <Collection_list key={index} name={item.name} create_at={item.create_at} className='w-20' />
+         </Link>
+      ))}
     </View>
    
   );
