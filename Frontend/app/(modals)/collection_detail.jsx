@@ -29,19 +29,24 @@ const CollectionDetail = () => {
   
      <View className='mt-10 h-full w-full'>
       <Text className='text-center font-psemibold text-2xl mt-2 text-green-500'>Topics</Text>
+
+
       {topics.map((item,index)=>(
-        
+       
 <Link key={index}
 href={
   {
     pathname: '/(modals)/card',
-    params: { id: item._id }
+    params: { id: item.id }
+   
   }
-} className='m-2 w-full'>
+} className='m-2 ml-8 w-5/6 bg-white rounded-md'>
   
-         <Collection_list key={index} name={item.name} create_at={item.create_at} className='w-20' />
+         <Collection_list key={index} name={item.name} create_at={item.create_at}  />
          </Link>
+        
       ))}
+  
     </View>
    
   );
