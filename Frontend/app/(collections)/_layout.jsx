@@ -6,9 +6,11 @@ const ModalLayout = () => {
   return (
     <>
     <Stack>
-      <Stack.Screen name="collection_detail" options={{ title: 'Collection Detail', headerShown:false }} />
-      <Stack.Screen name="card" options={{ title: 'Card', headerShown:false }} />
+      <Stack.Screen name="edit_topic" options={{ title: 'Edit Topic', headerShown:true }} />
+        <Stack.Screen name="add_collection" options={{ presentation:'modal', title: 'Add Collection', headerShown:true,
 
+      
+         }} />
     </Stack>
    <StatusBar backgroundColor="#A7C4B5" styles="light"/>
    

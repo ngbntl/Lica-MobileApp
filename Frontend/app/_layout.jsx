@@ -47,6 +47,7 @@ const RootLayout = () => {
       <Stack.Screen name="ls" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(modals)" options={{ headerShown: false }} />
+      <Stack.Screen name="(collections)" options={{ headerShown: false }} />
     </Stack>
   );
 };

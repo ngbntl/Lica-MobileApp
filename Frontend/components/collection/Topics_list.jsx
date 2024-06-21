@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Collection_list = ({name, create_at}) => {
+const Topics_list = ({name, create_at}) => {
   const date = new Date(create_at);
 
  
@@ -21,4 +21,4 @@ const Collection_list = ({name, create_at}) => {
   )
 }
 
-export default Collection_list
+export default Topics_list

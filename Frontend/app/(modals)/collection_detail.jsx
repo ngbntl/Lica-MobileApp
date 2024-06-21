@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Link, useLocalSearchParams } from 'expo-router';
 import topic from '../../apis/topics';
-import Collection_list from '../../components/collection/Colletion_list';
+import Topics_list from '../../components/collection/Topics_list';
 
 const CollectionDetail = () => {
 
@@ -42,7 +42,7 @@ href={
   }
 } className='m-2 ml-8 w-5/6 bg-white rounded-md'>
   
-         <Collection_list key={index} name={item.name} create_at={item.create_at}  />
+         <Topics_list key={index} name={item.name} create_at={item.create_at}  />
          </Link>
         
       ))}
