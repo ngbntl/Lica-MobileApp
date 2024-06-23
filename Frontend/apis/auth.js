@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 const baseUrl = "http://192.168.1.5:3000";
 
 const signin = async (data) => {
@@ -8,6 +9,7 @@ const signin = async (data) => {
     const response = await axios.post(url, data, {
       headers: { "Content-Type": "application/json" },
     });
+    SecureStore.setItemAsync("token", response.data.access_token);
     return response.data;
   } catch (error) {
     throw error;

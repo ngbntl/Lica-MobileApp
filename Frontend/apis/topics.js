@@ -15,7 +15,7 @@ const getTopics = async () => {
 const getTopicsByColletionId = async (id) => {
   try {
     console.log(id);
-    const url = `${baseUrl}/?collection=${id}`;
+    const url = `${baseUrl}/topic?collection=${id}`;
     const response = await axios.get(url);
     //console.log(response.data.items);
     return response.data.items;

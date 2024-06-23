@@ -5,11 +5,12 @@ import collections from '../../apis/collections';
 import CustomButton from '../../components/CustomButton';
 import { icons } from '../../constants';
 
-
+import { useIsFocused } from '@react-navigation/native';
 
 import { Link } from 'expo-router';
 
 const Collection = () => {
+  const isFocused = useIsFocused();
   const [collection, setCollection] = useState([]);
   useEffect(() => {
     const fetchCollection = async () => {
@@ -21,9 +22,9 @@ const Collection = () => {
       }
     };
     fetchCollection();
-  }, []);
+  }, [isFocused]);
   return (
-    <View className='h-screen w-full'>
+    <View className='h-screen'>
       <Text className = 'font-psemibold text-2xl mt-12 text-center text-green-500'>Collections</Text>
       {collection.map((item, index) => (
            <Link
@@ -34,7 +35,7 @@ const Collection = () => {
   }}
   className='m-2'
 >
-  <Collection_list key={index} title={item.name} image={item.image} description={item.description} className='h-20' style={{ flexDirection: 'row' }} />
+  <Collection_list key={index} title={item.name} image={item.image} description={item.description} className='h-20 ' style={{ flexDirection: 'row' }} />
 </Link>
 
         ))}
