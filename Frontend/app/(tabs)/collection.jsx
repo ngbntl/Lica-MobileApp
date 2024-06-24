@@ -31,7 +31,7 @@ const Collection = () => {
   key={index}
   href={{
     pathname: '/(collections)/edit_topic',
-     query: { id: item._id }
+     params: { id: item._id }
   }}
   className='m-2'
 >

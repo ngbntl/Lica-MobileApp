@@ -5,7 +5,7 @@ const getCollections = async () => {
   try {
     const url = `${baseUrl}`;
     const response = await axios.get(url);
-    console.log(response.data.items);
+    // console.log(response.data.items);
     return response.data.items;
   } catch (error) {
     throw error;

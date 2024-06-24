@@ -11,6 +11,8 @@ const ModalLayout = () => {
          }} />
         <Stack.Screen name="add_topic" options={{ presentation:'modal', title: 'Add Topic', headerShown:false,
          }} />
+        <Stack.Screen name="edit_card" options={{ presentation:'modal', title: 'Edit Card', headerShown:false,
+         }} />
     </Stack>
    <StatusBar backgroundColor="#A7C4B5" styles="light"/>
    

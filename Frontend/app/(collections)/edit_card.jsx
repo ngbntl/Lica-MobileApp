@@ -7,7 +7,7 @@ import { icons } from '../../constants';
 import * as SecureStore from 'expo-secure-store';
 import { useIsFocused } from '@react-navigation/native';
 
-const editTopic = () => {
+const editCard = () => {
   const isFocused = useIsFocused();
 
   const params = useLocalSearchParams();
@@ -33,7 +33,7 @@ const editTopic = () => {
   return (
   
      <View className='mt-10 h-full w-full'>
-      <Text className='text-center font-psemibold text-2xl mt-2 text-green-500'>Topics</Text>
+      <Text className='text-center font-psemibold text-2xl mt-2 text-green-500'>Cards</Text>
     
       {topics.map((item,index)=>(
        
@@ -68,4 +68,4 @@ const editTopic = () => {
   );
 };
 
-export default editTopic;
+export default editCard;

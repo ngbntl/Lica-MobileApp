@@ -24,7 +24,18 @@ const getTopicsByColletionId = async (id) => {
   }
 };
 
+const addTopic = async (data) => {
+  try {
+    const url = `${baseUrl}`;
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getTopics,
   getTopicsByColletionId,
+  addTopic,
 };
