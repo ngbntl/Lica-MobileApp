@@ -13,11 +13,11 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link } from 'expo-router'
-import { user } from '../../repositories/user';
+import { Link, router } from 'expo-router'
+import auth  from '../../apis/auth';
+import { addAuth } from '../../stores/reducers/authReducer'
 const signIn = () => {
 
-  // const {setUser, setIsLogged} = useGloc
   const [form, setForm] = useState({
     email:'',
     password:''
@@ -26,17 +26,25 @@ const signIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = async ()=>{
+    router.push('/home')
+ 
     if(!form.email || !form.password){
       Alert.alert('Error','Please fill in all the fields')
     }
-
     setIsSubmitting(true)
-
     try{
-      const res = await user.signin(form);
-      console.log(res)
+      const res = await auth.signin(form);
+      console.log(res);
+      router.push('/home')
+      dispatch(addAuth({email: form.email, accesstoken: res.accesstoken}));
+      
+
+     
     }catch(error){
-      Alert.alert('Error', error.message)
+      
+      if(error.message == "Request failed with status code 400"){
+        Alert.alert('Error','Invalid email or password');
+      }
     }finally{
       setIsSubmitting(false);
     }
