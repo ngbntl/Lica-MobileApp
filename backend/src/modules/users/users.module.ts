@@ -7,7 +7,7 @@ import { UsersRepository } from '@repositories/users.repository';
 import { UserRolesModule } from '@modules/user-roles/user-roles.module';
 import { Card, CardSchema } from '@modules/cards/entities/card.entity';
 import { Collection } from 'mongoose';
-import { CollectionSchema } from '@modules/collection/entities/collection.entity';
+import { CollectionSchema } from '@modules/collections/entities/collection.entity';
 
 @Module({
 	imports: [
