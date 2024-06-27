@@ -26,6 +26,10 @@ export class CardsController {
 		return this.cardsService.findAll();
 	}
 
+	@Get('card')
+	findByTopic(@Query('topic') topic: string) {
+		return this.cardsService.findAll({ topics: { $in: [topic] } });
+	}
 	@Get(':id')
 	findOne(@Param('id') id: string) {
 		return this.cardsService.findOne(id);

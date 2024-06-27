@@ -20,7 +20,7 @@ import { Topic } from './entities/topic.entity';
 import { Collection } from 'mongoose';
 
 @Controller('topics')
-@UseGuards(JwtAccessTokenGuard)
+// @UseGuards(JwtAccessTokenGuard)
 @UseInterceptors(MongooseClassSerializerInterceptor(Topic))
 export class TopicsController {
 	constructor(private readonly topicsService: TopicsService) {}
@@ -36,7 +36,7 @@ export class TopicsController {
 		return this.topicsService.findAll();
 	}
 
-	@Get()
+	@Get('topic')
 	findByCollection(@Query('collection') collection: string) {
 		return this.topicsService.findAll({ collections: { $in: [collection] } });
 	}
