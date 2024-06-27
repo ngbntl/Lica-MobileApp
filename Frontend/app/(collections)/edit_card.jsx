@@ -1,42 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity,SafeAreaView, Image } from 'react-native';
 import { Link, useLocalSearchParams } from 'expo-router';
-import topic from '../../apis/topics';
-import Topics_list from '../../components/collection/Topics_list';
+import Card_full from '../../components/card/card_full';
 import { icons } from '../../constants';
 import * as SecureStore from 'expo-secure-store';
 import { useIsFocused } from '@react-navigation/native';
+import card from '../../apis/card';
 
 const editCard = () => {
   const isFocused = useIsFocused();
 
   const params = useLocalSearchParams();
   const { id } = params;
-  const [topics, setTopics] = useState([]);
+  const [cards, setCard] = useState([]);
   useEffect(() => {
-    
-    const fetchTopics = async () => {
+    console.log(id)
+    const fetchCards  = async () => {
       try {
-       SecureStore.setItemAsync("tmpCollection", id)
-        const response = await topic.getTopicsByColletionId(id);
-        setTopics(response);
-      
+       SecureStore.setItemAsync("tmpTopic", id)
+
+        const response = await card.getCardsByTopic(id);
+        setCard(response); 
         console.log(response)
       } catch (error) {
         console.log(error);
       }
     };
-    fetchTopics();
+    fetchCards();
   }, [isFocused]);
   
   
   return (
-  
+    <SafeAreaView className='h-full'>
+
+  <ScrollView>
      <View className='mt-10 h-full w-full'>
       <Text className='text-center font-psemibold text-2xl mt-2 text-green-500'>Cards</Text>
     
-      {topics.map((item,index)=>(
-       
+      {cards.map((item,index)=>(
+     
        <Link key={index}
        href={
          {
@@ -45,17 +47,20 @@ const editCard = () => {
           
          }
        } className='m-2 ml-8 w-5/6 bg-white rounded-md'>
-         
-                <Topics_list key={index} name={item.name} create_at={item.create_at}  />
+         <Card_full vocabulary={item.vocabulary} definition={item.definition} pronunciation={item.pronunciation} className='p-4'/>
+       
                 </Link>
                
              ))}
 
-     
+
+    </View>
+    </ScrollView>
+         
   <TouchableOpacity className='absolute bottom-12 right-4'>
   <Link className='w-20 h-24'
   href={{
-    pathname: '/(collections)/add_topic',
+    pathname: '/(collections)/add_card',
    
   }}
 >
@@ -63,8 +68,7 @@ const editCard = () => {
 </Link>
 
   </TouchableOpacity>
-    </View>
-   
+  </SafeAreaView>
   );
 };
 

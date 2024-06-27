@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-const baseUrl = "http://192.168.1.5:3000";
+const baseUrl = "http://192.168.1.10:3000";
 
 const signin = async (data) => {
   try {
@@ -26,8 +26,20 @@ const signUp = async (data) => {
     throw error;
   }
 };
+const getUser = async (id) => {
+  try {
+    const url = `${baseUrl}/users/${id}`;
+    const response = await axios.get(url, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export default {
   signin,
   signUp,
+  getUser,
 };

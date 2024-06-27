@@ -35,7 +35,8 @@ const Collection = () => {
   }}
   className='m-2'
 >
-  <Collection_list key={index} title={item.name} image={item.image} description={item.description} className='h-20 ' style={{ flexDirection: 'row' }} />
+  <Collection_list key={index} title={item.name} image={item.image} description={item.description} className='h-20 w-full' style={{ flexDirection: 'row' }} />
+
 </Link>
 
         ))}

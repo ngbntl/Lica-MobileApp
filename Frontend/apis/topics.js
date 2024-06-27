@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://192.168.1.5:3000/topics";
+const baseUrl = "http://192.168.1.10:3000/topics";
 
 const getTopics = async () => {
   try {

@@ -2,14 +2,14 @@ import React, { useState, useRef,useEffect } from 'react';
 import { View, Text, Animated, PanResponder, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import card from '../../apis/card';
 import { useLocalSearchParams } from 'expo-router';
-
+import { LogBox } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Card = () => {
   const params = useLocalSearchParams();
   const { id } = params;
 console.log(id);
-
+LogBox.ignoreAllLogs(true);
   const [cards, setCard] = useState([]);
   useEffect(() => {
     const fetchCard = async () => {
@@ -72,12 +72,16 @@ console.log(id);
   return (
     <View className='mt-10'>
     {currentCard ? (
-      <Animated.View
-        style={{
-          transform: [{ translateX: pan.x }],
-        }}
-        {...panResponder.panHandlers}
-      >
+     <Animated.View
+  style={{
+    transform: [
+      {
+        translateX: pan.x
+      },
+    ],
+  }}
+  {...panResponder.panHandlers}
+>
         <TouchableWithoutFeedback onPress={() => setIsFlipped(!isFlipped)}>
           <View className='bg-white items-center justify-center h-4/5 w-5/6 mt-16 ml-8 p-5'>
             <Text className='font-psemibold text-4xl p-4'>{isFlipped ? currentCard.definition : currentCard.vocabulary}</Text>

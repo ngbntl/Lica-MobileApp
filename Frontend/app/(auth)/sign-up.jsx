@@ -20,12 +20,13 @@ const signUp = () => {
     setIsSubmitting(true);
 
     try{
-    const res = await authenticationAPI.HandleAuthentication('/sign-up',form,'post');
+    const res = await authenticationAPI.signUp(form);
     console.log(res);
     }catch(error){
       console.log(error);
-      setIsSubmitting(false);
     }
+    setIsSubmitting(false);
+
     }
   
   

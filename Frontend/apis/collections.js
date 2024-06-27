@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://192.168.1.5:3000/collections";
+const baseUrl = "http://192.168.1.10:3000/collections";
 
 const getCollections = async () => {
   try {
